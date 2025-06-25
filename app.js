@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 3000; // Obtiene el puerto de las variables de entorno o usa 3000 por defecto
+const port = process.env.PORT || 3000; // Obtiene el puerto de las variables de entorno o usa 4000 por defecto
 
 // Middleware para parsear JSON en las solicitudes
 app.use(express.json());
