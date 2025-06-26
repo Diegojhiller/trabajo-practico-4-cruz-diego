@@ -1,9 +1,8 @@
-# Directorios de módulos
+#archivos ignorados por git
 node_modules/
 
 # Archivos de entorno
 .env# Directorios de módulos
 node_modules/
-
 # Archivos de entorno
 .env

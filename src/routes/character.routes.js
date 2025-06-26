@@ -13,6 +13,6 @@ routes.get("/" , getAllCharacter);
 routes.get("/:id", getCharacterById);
 routes.post("/" , createCharacter);
 routes.put("/:id" , updateCharacter);
-routes.delete("/: id" , deleteCharacter);
+routes.delete("/:id" , deleteCharacter);
 
 export default routes;

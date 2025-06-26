@@ -10,23 +10,22 @@ app.use(express.json());
 
 app.use("/api/characters", characterRoutes);
 
-const PORT = process.env.PORT || 4000; 
+const PORT = process.env.PORT || 4000;
 
 const init = async () => {
   try {
     await sequelize.authenticate();
-    console.log("Nos pudimos conectar a la base de datos!");
-    
+    console.log("¡Nos pudimos conectar a la base de datos!");
+
     await sequelize.sync();
 
     app.listen(PORT, () => {
       console.log(`Servidor escuchando en http://localhost:${PORT}`);
     });
   } catch (error) {
-      console.log("Error al conectar a la base de datos: ", err);
+    console.log("Error al conectar a la base de datos: ", error);
   }
 };
 
-init ();
-
+init();
 
