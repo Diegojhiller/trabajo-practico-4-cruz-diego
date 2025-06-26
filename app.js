@@ -1,22 +1,34 @@
-// src/app.js
 import express from "express";
 import dotenv from "dotenv";
+import sequelize from "./src/config/database.js";
+import characterRoutes from "./src/routes/character.routes.js";
 
-// Cargar variables de entorno desde .env
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 3000; // Obtiene el puerto de las variables de entorno o usa 4000 por defecto
+const port = process.env.PORT || 3000; // Obtiene el puerto de las variables de entorno o usa 3000 por defecto
 
 // Middleware para parsear JSON en las solicitudes
 app.use(express.json());
 
-// Ruta de prueba (opcional, para verificar que el servidor funciona)
-app.get("/", (req, res) => {
-  res.send("¡API de Dragon Ball funcionando!");
-});
+app.use("/api/characters", characterRoutes);
 
-// Iniciar el servidor
-app.listen(port, () => {
-  console.log(`Servidor escuchando en http://localhost:${port}`);
-});
+const PORT = process.env.PORT || 4000;
+
+const init = async () => {
+  try {
+    await sequelize.authenticate();
+    console.log("¡Nos pudimos conectar a la base de datos!");
+
+    await sequelize.sync();
+
+    app.listen(PORT, () => {
+      console.log(`Servidor escuchando en http://localhost:${PORT}`);
+    });
+  } catch (error) {
+    console.log("Error al conectar a la base de datos: ", error);
+  }
+};
+
+init();
+
