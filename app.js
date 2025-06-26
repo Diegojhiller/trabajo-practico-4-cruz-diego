@@ -1,17 +1,33 @@
 import express from "express";
 import dotenv from "dotenv";
+import sequelize from "./src/config/database.js";
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
 
+app.get( "/" , (req,res) =>{
+  res.send("API Dragon ball funcionando")
+});
+
 const PORT = process.env.PORT || 4000; 
 
+const init = async () => {
+  try {
+    await sequelize.authenticate();
+    console.log("Nos pudimos conectar a la base de datos!");
+    
+    await sequelize.sync();
+
+    app.listen(PORT, () => {
+      console.log(`Servidor escuchando en http://localhost:${PORT}`);
+    });
+  } catch (error) {
+      console.log("Error al conectar a la base de datos: ", err);
+  }
+};
+
+init ();
 
 
-
-// Iniciar el servidor
-app.listen(PORT, () => {
-  console.log(`Servidor escuchando en http://localhost:${PORT}`);
-});
